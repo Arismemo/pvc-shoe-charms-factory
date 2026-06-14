@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arismemo.github.io/pvc-shoe-charms-factory/sitemap.xml
