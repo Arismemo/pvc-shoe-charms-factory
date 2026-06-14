@@ -31,7 +31,7 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Manufacturer",
+  "@type": "Organization",
   "name": "SHANXING",
   "description": "Custom PVC shoe charms factory in Fujian, China. Specializing in croc charms, jibbitz, and clog charms for global brands.",
   "url": "https://arismemo.github.io/pvc-shoe-charms-factory/",
@@ -47,7 +47,11 @@
     "telephone": "+86-176-3004-5927",
     "email": "xfinhome@gmail.com",
     "availableLanguage": ["English", "Chinese"]
-  }]
+  }],
+  "sameAs": [
+    "https://wa.me/8617630045927",
+    "https://t.me/liukun4321"
+  ]
 }
 </script>
 
@@ -250,6 +254,24 @@ footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--txt-mute);f
 .footer-grid a{color:var(--txt-dim)}
 .footer-grid a:hover{color:var(--blue)}
 
+/* Quote Form */
+.quote-form{max-width:680px;margin:2.5rem auto 0;background:var(--bg-2);border:1px solid var(--line);border-radius:1rem;padding:2rem;text-align:left}
+.quote-form h3{font-size:1.25rem;margin-bottom:.35rem;text-align:center}
+.quote-form .hint{text-align:center;color:var(--txt-mute);font-size:.85rem;margin-bottom:1.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--txt-dim);margin-bottom:.4rem;letter-spacing:.02em}
+.field input,.field select,.field textarea{width:100%;padding:.7rem .85rem;background:var(--bg);border:1px solid var(--line);border-radius:.5rem;color:var(--txt);font-family:inherit;font-size:.95rem;transition:border-color .2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue)}
+.field textarea{resize:vertical;min-height:90px}
+.qty-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
+.qty-chip{padding:.35rem .85rem;background:var(--bg);border:1px solid var(--line);border-radius:999px;font-size:.82rem;color:var(--txt-dim);cursor:pointer;transition:all .15s}
+.qty-chip:hover{border-color:var(--blue);color:var(--txt)}
+.form-submit{display:flex;justify-content:center;margin-top:.5rem}
+.form-submit .btn{font-size:1.05rem;padding:.9rem 2.5rem}
+.form-note{text-align:center;color:var(--txt-mute);font-size:.8rem;margin-top:.85rem}
+
 .section-alt{background:linear-gradient(180deg,transparent,rgba(30,41,59,.3),transparent)}
 </style>
 </head>
@@ -418,8 +440,55 @@ footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--txt-mute);f
           <div class="ic">✈️</div><div class="ch">Telegram</div><div class="vl">@liukun4321</div>
         </a>
         <a class="contact-card" href="#quote-form">
-          <div class="ic">📋</div><div class="ch">Quick Form</div><div class="vl">Submit online</div>
+          <div class="ic">📋</div><div class="ch">Quick Form</div><div class="vl">Fill in below ↓</div>
         </a>
+      </div>
+
+      <!-- Quote Form -->
+      <div class="quote-form" id="quote-form">
+        <h3>Request Your Free Quote</h3>
+        <p class="hint">Fill this in, hit submit, and your default mail app opens with everything pre-filled. Reply within 24 hours.</p>
+        <form id="quoteForm">
+          <div class="form-row">
+            <div class="field">
+              <label for="q-name">Your Name *</label>
+              <input type="text" id="q-name" name="name" required placeholder="John Smith">
+            </div>
+            <div class="field">
+              <label for="q-company">Company / Brand</label>
+              <input type="text" id="q-company" name="company" placeholder="Acme Co.">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="q-email">Email *</label>
+              <input type="email" id="q-email" name="email" required placeholder="you@company.com">
+            </div>
+            <div class="field">
+              <label for="q-country">Country</label>
+              <input type="text" id="q-country" name="country" placeholder="United States">
+            </div>
+          </div>
+          <div class="field">
+            <label>Target Quantity (per design)</label>
+            <div class="qty-chips" id="qtyChips">
+              <span class="qty-chip" data-qty="100-499 pcs">100–499</span>
+              <span class="qty-chip" data-qty="500-1999 pcs">500–1999</span>
+              <span class="qty-chip" data-qty="2000-4999 pcs">2000–4999</span>
+              <span class="qty-chip" data-qty="5000+ pcs">5000+</span>
+              <span class="qty-chip" data-qty="Not sure yet">Not sure</span>
+            </div>
+            <input type="hidden" id="q-qty" name="quantity" value="">
+          </div>
+          <div class="field">
+            <label for="q-details">Design Details *</label>
+            <textarea id="q-details" name="details" required placeholder="Describe your design: shape, colors, size, number of designs, target launch date, etc. You can attach artwork in the email after submitting."></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary">Send Quote Request →</button>
+          </div>
+          <p class="form-note">Opens your email app pre-filled to xfinhome@gmail.com. Prefer another channel? Use WhatsApp / Telegram above.</p>
+        </form>
       </div>
     </div>
   </div>
@@ -435,6 +504,53 @@ footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--txt-mute);f
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  // Quantity chip selection
+  var chips = document.querySelectorAll('#qtyChips .qty-chip');
+  var qtyInput = document.getElementById('q-qty');
+  var selectedChip = null;
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      if(selectedChip){ selectedChip.style.borderColor=''; selectedChip.style.color=''; }
+      selectedChip = chip;
+      chip.style.borderColor = '#60A5FA';
+      chip.style.color = '#F8FAFC';
+      qtyInput.value = chip.getAttribute('data-qty');
+    });
+  });
+
+  // Form submit -> mailto
+  var form = document.getElementById('quoteForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = (document.getElementById('q-name').value||'').trim();
+    var company = (document.getElementById('q-company').value||'').trim();
+    var email = (document.getElementById('q-email').value||'').trim();
+    var country = (document.getElementById('q-country').value||'').trim();
+    var qty = (document.getElementById('q-qty').value||'Not specified').trim();
+    var details = (document.getElementById('q-details').value||'').trim();
+
+    var subject = 'Quote Request: Custom PVC Shoe Charms — ' + (company||name);
+    var body = [
+      'Name: ' + name,
+      'Company: ' + (company||'-'),
+      'Email: ' + email,
+      'Country: ' + (country||'-'),
+      'Quantity: ' + qty,
+      '',
+      'Design Details:',
+      details,
+      '',
+      '— Sent from arismemo.github.io/pvc-shoe-charms-factory'
+    ].join('\n');
+
+    var mailto = 'mailto:xfinhome@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.location.href = mailto;
+  });
+})();
+</script>
 
 </body>
 </html>
