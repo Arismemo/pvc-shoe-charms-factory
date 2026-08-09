@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Search and AI discovery crawlers are allowed by the general rule above.
+# This does not make a separate compliance or ranking claim.
+
 Sitemap: https://arismemo.github.io/pvc-shoe-charms-factory/sitemap.xml

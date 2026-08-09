@@ -96,7 +96,8 @@ def main() -> int:
         "Source: SHANXING website",
         "Send Quote via WhatsApp",
         "Number of Designs",
-        "City / Postal Code",
+        "Delivery City",
+        "Postal Code",
     ]
     for phrase in required_index:
         check(phrase.lower() in index_text.lower(), f"index.html missing: {phrase}", errors)
@@ -132,6 +133,11 @@ def main() -> int:
 
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     check("<lastmod>2026-08-09</lastmod>" in sitemap, "sitemap lastmod not updated to 2026-08-09", errors)
+    llms = ROOT / "llms.txt"
+    check(llms.exists(), "missing file: llms.txt", errors)
+    if llms.exists():
+        llms_text = llms.read_text(encoding="utf-8")
+        check("The HTML pages above are the authoritative public content" in llms_text, "llms.txt missing authority boundary", errors)
 
     if errors:
         print("SITE VALIDATION FAILED")
