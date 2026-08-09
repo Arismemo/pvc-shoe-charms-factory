@@ -15,14 +15,12 @@
 | Top2-5 | Made-in-China / Accio / GoldSupplier | B2B 平台产品页 | **内容薄、无 Schema、无差异化** |
 | 其他 | ycgifts.com 等 | 工厂官网 | 有博客但 SEO 基建弱 |
 
-**结论**：前 10 名只有 1 个独立站做了深度内容，且没人用 FAQ/HowTo 富媒体。**一个 Schema 完备的独立站可轻松进前 3。**
+**历史假设（未复核）**：早期方案曾判断独立站深度内容不足。不得将“可轻松进前 3”视为已验证结论；后续以 Search Console 的真实曝光、查询词、点击与询盘为准。
 
-### 品类红利数据（来源：Alibaba 卖家博客 2026）
+### 品类红利数据（历史研究线索，发布前须重新核验来源）
 
-- Shoe Decorations 是鞋类配件最大子类目，**近 9000 活跃买家**
-- **Croc charms / clog charms 搜索量增长 130%**
-- PVC 是大众市场主流材质（成本 $0.02-0.08/件）
-- EN71 / CPSIA / REACH 认证是欧美儿童产品硬性门槛
+- 早期记录的活跃买家、搜索增长和成本数字未保留可验证证据，禁止直接发布。
+- EN71 / CPSIA / REACH 等要求必须结合产品分类、市场和报告范围表述，不能使用“所有产品已认证”的绝对语言。
 
 ---
 
@@ -124,7 +122,7 @@ HowTo             → "How to order custom PVC shoe charms" 七步法
 FAQPage           → 采购决策问题
 ```
 
-**效果**：搜索结果页直接展示折叠问答 + 分步教程，点击率比纯文本高 2-3 倍。
+**目标**：结构化数据帮助搜索引擎理解页面。实际富媒体展示和点击率由搜索引擎决定，须以 Search Console 数据验证。
 
 ---
 
@@ -217,15 +215,15 @@ FAQ 区  ← FAQPage Schema
 ```
 Google 搜索 "custom PVC shoe charms manufacturer"
     ↓
-搜索结果展示 HowTo/FAQ 富媒体卡片（点击率 +200%）
+搜索结果可能展示增强信息（是否展示及点击变化待真实数据验证）
     ↓
 进入 guide.html 采购指南（建立信任）
     ↓
 七步法末端 CTA："Request Free Samples"
     ↓
-询盘表单（姓名/公司/国家/数量/设计稿上传）
+询盘表单（姓名/公司/国家/数量/款数/尺寸/城市邮编）
     ↓
-同步推送：WhatsApp + Email + Telegram
+优先跳转 WhatsApp，并在预填信息中记录 `Source: SHANXING website`
 ```
 
 ### CTA 全渠道入口（你已确认全支持）

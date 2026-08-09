@@ -11,6 +11,7 @@ B2B 独立站,用 SEO 内容给福建 PVC 鞋花工厂获取海外买家询盘�
 ├── 404.html        自定义 404
 ├── robots.txt      全开放
 ├── sitemap.xml     含 2 个 URL
+├── scripts/validate_site.py 静态回归测试（Schema/链接/文案/WhatsApp来源）
 ├── favicon.svg     站点图标
 └── SEO_STRATEGY.md 完整 SEO 方案文档
 ```
@@ -56,6 +57,15 @@ gh api -X POST repos/Arismemo/pvc-shoe-charms-factory/pages \
 | canonical | ✅ | ✅ |
 | sitemap + robots | ✅ | ✅ |
 
+## 2026-08-09 转化与事实修订
+
+- 报价改为“先给 budgetary answer，再按 artwork/物流复核 final quote”
+- WhatsApp CTA 与表单自动带 `Source: SHANXING website`，可识别网站线索
+- 明确“模具制造委外、鞋花产品生产在本厂”
+- 材料检测仅按供应商报告覆盖范围表述，不扩大成所有成品/批次认证
+- 去除无依据的市场规模、绝对领先、固定物流与免费样品等承诺
+- 加入 IP、品牌非关联、进口与检测边界
+
 ## 待补素材(影响转化,不影响上线)
 
 - [ ] 产品图片 / 设计稿(放 images/ 目录)
@@ -63,6 +73,13 @@ gh api -X POST repos/Arismemo/pvc-shoe-charms-factory/pages \
 - [ ] 认证证书扫描件(EN71/CPSIA)
 - [ ] og_image.webp(1200×630 分享图)
 - [ ] 真实案例图(已出货的鞋花成品照)
+
+## 发布前验证
+
+```bash
+python3 scripts/validate_site.py
+python3 -m http.server 8000
+```
 
 ## 上线后必做
 
