@@ -337,6 +337,37 @@ footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--txt-mute);f
 .form-note{text-align:center;color:var(--txt-mute);font-size:.8rem;margin-top:.85rem}
 .policy-note{max-width:760px;margin:1.5rem auto 0;color:var(--txt-dim);font-size:.88rem;line-height:1.65;text-align:left}
 
+/* Budget calculator */
+.calc[hidden]{display:none}
+.calc{max-width:760px;margin:0 auto;background:var(--bg-2);border:1px solid var(--line);border-radius:1rem;padding:2rem;display:grid;gap:1.1rem;text-align:left}
+.calc-rows{display:grid;gap:.9rem}
+.calc-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) 2.95rem;gap:.75rem;align-items:end}
+.calc-row .field{margin-bottom:0}
+.calc-remove{width:2.95rem;height:2.95rem;border:1px solid var(--line);border-radius:.5rem;background:var(--bg);color:var(--txt-dim);font-size:1.4rem;line-height:1;cursor:pointer}
+.calc-remove:hover{border-color:var(--blue);color:var(--txt)}
+.calc-msg,.calc-error{grid-column:1/-1;color:var(--amber);font-size:.9rem}
+.calc-msg:empty{display:none}
+.calc-row input[aria-invalid="true"]{border-color:var(--amber)}
+.calc-out:empty{display:none}
+.calc-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.calc-table th,.calc-table td{text-align:left;vertical-align:top;padding:.6rem .6rem .6rem 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.calc-table thead th{font-size:.8rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--txt-mute)}
+.calc-table th:not(:first-child),.calc-table td:not(:first-child){text-align:right;white-space:nowrap}
+.calc-table th:last-child,.calc-table td:last-child{padding-right:0}
+.calc-sum{display:grid;gap:.55rem;margin-top:1rem}
+.calc-sum>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.2rem 1rem}
+.calc-sum dt{color:var(--txt-dim)}
+.calc-sum dd{margin:0;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.calc-sum dd span{display:block;font-weight:400;font-size:.85rem;color:var(--txt-mute)}
+.calc-sum .calc-total{border-top:2px solid var(--line);padding-top:.65rem}
+.calc-sum .calc-total dt{color:var(--txt);font-weight:700}
+.calc-sum .calc-total dd{font-size:1.25rem;font-weight:800;color:var(--green)}
+.calc-out h3{margin-top:1.5rem;font-size:1.05rem}
+.calc-small,.calc-note{font-size:.88rem;color:var(--txt-mute);margin-top:.7rem;line-height:1.6}
+.calc-note{margin-top:0}
+.calc-actions{display:flex;flex-wrap:wrap;gap:.9rem}
+@media(max-width:520px){.calc{padding:1.25rem}.calc-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 2.95rem;gap:.5rem}.calc-row label{font-size:.78rem}}
+
 .whatsapp-float{position:fixed;right:1.25rem;bottom:1.25rem;z-index:60;background:#25D366;color:#071A0E;border-radius:999px;padding:.8rem 1.1rem;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.35);display:flex;gap:.45rem;align-items:center;transition:transform .15s}
 .whatsapp-float:hover{transform:translateY(-2px)}
 @media(max-width:520px){.whatsapp-float{right:.8rem;bottom:.8rem;padding:.75rem;width:52px;height:52px;justify-content:center}.whatsapp-float span:last-child{display:none}}
@@ -475,6 +506,41 @@ footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--txt-mute);f
         <li>Typical mold fee: $30–$80 per design</li>
         <li>Mold fee may be waived for a qualifying large order</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET CALCULATOR -->
+<section id="quote-calculator">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Budget Calculator</span>
+      <h2>Estimate your order budget</h2>
+      <p>Enter the number of designs and the pieces of each design. The calculator applies the tiers and mold fee above and estimates when the charms could arrive.</p>
+    </div>
+    <noscript><p class="policy-note">The calculator needs JavaScript. Use the price table above: price per piece by quantity per design, plus a mold fee of $30–$80 per design.</p></noscript>
+    <div class="calc" hidden>
+      <div class="calc-rows">
+        <div class="calc-row">
+          <div class="field">
+            <label for="calc-designs-1">Designs</label>
+            <input id="calc-designs-1" name="designs" type="number" inputmode="numeric" min="1" step="1" value="1">
+          </div>
+          <div class="field">
+            <label for="calc-pieces-1">Pieces per design</label>
+            <input id="calc-pieces-1" name="pieces" type="number" inputmode="numeric" min="1" step="1" value="300">
+          </div>
+          <button type="button" class="calc-remove" aria-label="Remove this line" hidden>×</button>
+          <p class="calc-msg"></p>
+        </div>
+      </div>
+      <div class="calc-actions"><button type="button" class="btn btn-ghost calc-add">Add a line</button></div>
+      <div class="calc-out" aria-live="polite"></div>
+      <p class="calc-note">Budgetary estimate, not a final offer. The final price follows artwork review. USD, EXW Fujian; shipping, duties and taxes, special packing and testing are excluded.</p>
+      <div class="calc-actions">
+        <button type="button" class="btn btn-whatsapp calc-send-wa">Send estimate via WhatsApp</button>
+        <button type="button" class="btn btn-primary calc-send-mail">Send estimate by email</button>
+      </div>
     </div>
   </div>
 </section>
@@ -649,6 +715,283 @@ footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--txt-mute);f
     </div>
   </div>
 </footer>
+
+<script type="application/json" id="quote-data">{"moq":100,"tiers":[{"min":100,"max":499,"price":"0.30","cents":30},{"min":500,"max":1999,"price":"0.20","cents":20},{"min":2000,"max":4999,"price":"0.15","cents":15},{"min":5000,"max":null,"price":"0.10","cents":10}],"mold":[30,80],"moldWaiver":5000,"quoteDays":1,"sampleDays":3,"bulk":[{"min":1,"max":4999,"days":[7,10]},{"min":5000,"max":50000,"days":[12,15]}],"air":[5,7],"sea":[25,35]}</script>
+
+<script>
+// Budget calculator in #quote-calculator. Every price, mold fee, minimum and lead time is read
+// at runtime from the JSON block #quote-data above, so no amount is hardcoded in this script.
+(function () {
+  var node = document.getElementById('quote-data');
+  if (!node) return;
+  var D = JSON.parse(node.textContent);
+  var maxBulk = D.bulk[D.bulk.length - 1].max;
+
+  function num(n) { return n.toLocaleString('en-US'); }
+  function money(cents) {
+    return '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function moneyRange(a, b) { return money(a) + ' – ' + money(b); }
+  function unit(tier) { return '$' + tier.price; }
+
+  var T = {
+    line: function (l) { return l.designs + (l.designs === 1 ? ' design' : ' designs') + ' × ' + num(l.pieces) + ' pieces'; },
+    head: ['Line', 'Price per piece', 'Subtotal'],
+    goods: 'Charms total',
+    molds: 'Molds',
+    moldWhy: function (n, w) {
+      var s = n ? n + (n === 1 ? ' design' : ' designs') + ' at $' + D.mold[0] + '–' + D.mold[1] + ' each' : '';
+      if (w) s += (s ? '; ' : '') + 'no mold fee for ' + w + (w === 1 ? ' design' : ' designs') + ' at ' + num(D.moldWaiver) + ' pieces or more';
+      return s;
+    },
+    total: 'Total budget',
+    samples: 'The sample fee is quoted with your artwork and credited against your bulk order. It is not in the total above.',
+    arrival: 'Estimated arrival',
+    air: 'By air',
+    sea: 'By sea',
+    tooBig: 'For orders over ' + num(maxBulk) + ' pieces in total, we confirm the lead time with the quote.',
+    assume: function (pieces, b) {
+      return 'Counted from today: a price within ' + (D.quoteDays === 1 ? 'one working day' : D.quoteDays + ' working days') +
+        ', a sample about ' + D.sampleDays +
+        ' business days after you approve the artwork, bulk production of all ' + num(pieces) + ' pieces in ' +
+        b.days[0] + '–' + b.days[1] + ' days, then shipping. This assumes you approve the artwork, the quote and the sample ' +
+        'on the same day, and approve the sample from photos and video. The time you take to confirm the artwork, ' +
+        'shipping a physical sample and public holidays are not included.';
+    },
+    bad: 'Enter whole numbers above 0 for designs and pieces.',
+    moq: 'The minimum order is ' + num(D.moq) + ' pieces per design.',
+    fix: 'Fix the marked line above to see the estimate.',
+    textHead: function (day) { return 'Budget estimate from the calculator on arismemo.github.io/pvc-shoe-charms-factory (' + day + '):'; },
+    textLine: function (l) { return T.line(l) + ': ' + unit(l.tier) + ' per piece, ' + money(l.subtotal); },
+    textTerms: 'EXW Fujian, not including shipping, duties and taxes, special packing or testing',
+    textSamples: 'Sample fee: quoted with the artwork, credited against the bulk order'
+  };
+
+  // ---------------------------------------------------------------- calculation
+
+  function tierOf(pieces) {
+    for (var i = D.tiers.length - 1; i >= 0; i--) {
+      if (pieces >= D.tiers[i].min) return i;
+    }
+    return -1;
+  }
+
+  // lines: [{designs, pieces}] with whole numbers; returns the priced estimate or the first problem
+  function estimate(lines) {
+    var est = { lines: [], goods: 0, moldLow: 0, moldHigh: 0, moldDesigns: 0, waived: 0, designs: 0, pieces: 0 };
+    for (var i = 0; i < lines.length; i++) {
+      var l = lines[i];
+      if (!(l.designs >= 1 && l.pieces >= 1)) return { error: T.bad, index: i };
+      if (l.pieces < D.moq) return { error: T.moq, index: i };
+      var t = tierOf(l.pieces);
+      var item = { designs: l.designs, pieces: l.pieces, tierIndex: t, tier: D.tiers[t],
+                   subtotal: l.designs * l.pieces * D.tiers[t].cents };
+      est.lines.push(item);
+      est.goods += item.subtotal;
+      if (l.pieces >= D.moldWaiver) {
+        est.waived += l.designs;
+      } else {
+        est.moldDesigns += l.designs;
+        est.moldLow += l.designs * D.mold[0] * 100;
+        est.moldHigh += l.designs * D.mold[1] * 100;
+      }
+      est.designs += l.designs;
+      est.pieces += l.designs * l.pieces;
+    }
+    est.bulk = null;
+    for (var j = 0; j < D.bulk.length; j++) {
+      if (est.pieces >= D.bulk[j].min && est.pieces <= D.bulk[j].max) est.bulk = D.bulk[j];
+    }
+    if (est.bulk) {
+      var today = new Date();
+      today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var sample = addBusinessDays(addBusinessDays(today, D.quoteDays), D.sampleDays);
+      var made = [addDays(sample, est.bulk.days[0]), addDays(sample, est.bulk.days[1])];
+      est.today = today;
+      est.air = [addDays(made[0], D.air[0]), addDays(made[1], D.air[1])];
+      est.sea = [addDays(made[0], D.sea[0]), addDays(made[1], D.sea[1])];
+    }
+    return est;
+  }
+
+  function addDays(date, n) {
+    var d = new Date(date.getTime());
+    d.setDate(d.getDate() + n);
+    return d;
+  }
+
+  // Business days skip Saturday and Sunday; public holidays are not known here.
+  function addBusinessDays(date, n) {
+    var d = new Date(date.getTime());
+    while (n > 0) {
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() !== 0 && d.getDay() !== 6) n--;
+    }
+    return d;
+  }
+
+  var dateFormat = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  function dateRange(pair) {
+    if (dateFormat.formatRange) return dateFormat.formatRange(pair[0], pair[1]);
+    return dateFormat.format(pair[0]) + ' – ' + dateFormat.format(pair[1]);
+  }
+  function isoDay(d) {
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  }
+
+  // Plain-text estimate for the WhatsApp message and the email.
+  function summary(est) {
+    var out = [T.textHead(isoDay(est.today || new Date()))];
+    est.lines.forEach(function (l) { out.push(T.textLine(l)); });
+    out.push(T.goods + ': ' + money(est.goods));
+    var why = T.moldWhy(est.moldDesigns, est.waived);
+    out.push(T.molds + ': ' + (est.moldDesigns ? moneyRange(est.moldLow, est.moldHigh) : money(0)) +
+             (why ? ' (' + why + ')' : ''));
+    out.push(T.textSamples);
+    out.push(T.total + ': ' + moneyRange(est.goods + est.moldLow, est.goods + est.moldHigh) + ', ' + T.textTerms);
+    if (est.bulk) {
+      out.push(T.arrival + ': ' + T.air.toLowerCase() + ' ' + dateRange(est.air) + '; ' +
+               T.sea.toLowerCase() + ' ' + dateRange(est.sea));
+    } else {
+      out.push(T.tooBig);
+    }
+    return out.join('\n');
+  }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  function sumRow(list, label, value, note, cls) {
+    var row = el('div', cls);
+    row.appendChild(el('dt', '', label));
+    var dd = el('dd', '', value);
+    if (note) dd.appendChild(el('span', '', note));
+    row.appendChild(dd);
+    list.appendChild(row);
+  }
+
+  // ---------------------------------------------------------------- calculator
+
+  function calculator(root) {
+    var rows = root.querySelector('.calc-rows');
+    var out = root.querySelector('.calc-out');
+    var sendWa = root.querySelector('.calc-send-wa');
+    var sendMail = root.querySelector('.calc-send-mail');
+    var template = rows.querySelector('.calc-row').cloneNode(true);
+    var counter = 1;
+    var current = null;
+
+    function readLines() {
+      return Array.prototype.map.call(rows.querySelectorAll('.calc-row'), function (row) {
+        var d = row.querySelector('[name="designs"]').value.trim();
+        var p = row.querySelector('[name="pieces"]').value.trim();
+        return { designs: /^\d+$/.test(d) ? parseInt(d, 10) : 0, pieces: /^\d+$/.test(p) ? parseInt(p, 10) : 0 };
+      });
+    }
+
+    function update() {
+      var all = rows.querySelectorAll('.calc-row');
+      Array.prototype.forEach.call(all, function (row) {
+        row.querySelector('.calc-msg').textContent = '';
+        row.querySelector('.calc-remove').hidden = all.length < 2;
+        Array.prototype.forEach.call(row.querySelectorAll('input'), function (i) { i.removeAttribute('aria-invalid'); });
+      });
+      var est = estimate(readLines());
+      out.innerHTML = '';
+      if (est.error) {
+        var bad = all[est.index];
+        bad.querySelector('.calc-msg').textContent = est.error;
+        Array.prototype.forEach.call(bad.querySelectorAll('input'), function (i) { i.setAttribute('aria-invalid', 'true'); });
+        out.appendChild(el('p', 'calc-error', est.error + ' ' + T.fix));
+        sendWa.disabled = sendMail.disabled = true;
+        current = null;
+        return;
+      }
+      current = est;
+      sendWa.disabled = sendMail.disabled = false;
+
+      var table = el('table', 'calc-table');
+      var head = el('tr');
+      T.head.forEach(function (h) { var th = el('th', '', h); th.scope = 'col'; head.appendChild(th); });
+      table.appendChild(el('thead')).appendChild(head);
+      var body = table.appendChild(el('tbody'));
+      est.lines.forEach(function (l) {
+        var tr = el('tr');
+        tr.appendChild(el('td', '', T.line(l)));
+        tr.appendChild(el('td', '', unit(l.tier)));
+        tr.appendChild(el('td', '', money(l.subtotal)));
+        body.appendChild(tr);
+      });
+      out.appendChild(table);
+
+      var sums = el('dl', 'calc-sum');
+      sumRow(sums, T.goods, money(est.goods));
+      sumRow(sums, T.molds, est.moldDesigns ? moneyRange(est.moldLow, est.moldHigh) : money(0),
+             T.moldWhy(est.moldDesigns, est.waived));
+      sumRow(sums, T.total, moneyRange(est.goods + est.moldLow, est.goods + est.moldHigh), '', 'calc-total');
+      out.appendChild(sums);
+      out.appendChild(el('p', 'calc-small', T.samples));
+
+      out.appendChild(el('h3', '', T.arrival));
+      if (est.bulk) {
+        var dates = el('dl', 'calc-sum');
+        sumRow(dates, T.air, dateRange(est.air));
+        sumRow(dates, T.sea, dateRange(est.sea));
+        out.appendChild(dates);
+        out.appendChild(el('p', 'calc-small', T.assume(est.pieces, est.bulk)));
+      } else {
+        out.appendChild(el('p', 'calc-small', T.tooBig));
+      }
+    }
+
+    function addRow() {
+      counter++;
+      var row = template.cloneNode(true);
+      Array.prototype.forEach.call(row.querySelectorAll('input'), function (input) {
+        var id = input.id.replace(/\d+$/, counter);
+        row.querySelector('label[for="' + input.id + '"]').htmlFor = id;
+        input.id = id;
+      });
+      rows.appendChild(row);
+      row.querySelector('input').focus();
+      update();
+    }
+
+    function message() {
+      return ['Hello SHANXING, I would like a quote based on this budget estimate.',
+              '', summary(current), '', 'Source: SHANXING website'].join('\n');
+    }
+
+    rows.addEventListener('input', update);
+    rows.addEventListener('click', function (event) {
+      var button = event.target.closest('.calc-remove');
+      if (!button) return;
+      button.closest('.calc-row').remove();
+      update();
+      rows.querySelector('input').focus();
+    });
+    root.querySelector('.calc-add').addEventListener('click', addRow);
+    sendWa.addEventListener('click', function () {
+      if (!current) return;
+      window.open('https://wa.me/8617630045927?text=' + encodeURIComponent(message()), '_blank', 'noopener');
+    });
+    sendMail.addEventListener('click', function () {
+      if (!current) return;
+      location.href = 'mailto:sales@mochicharms.com?subject=' + encodeURIComponent('Shoe charm budget estimate') +
+                      '&body=' + encodeURIComponent(message());
+    });
+    root.hidden = false;
+    update();
+  }
+
+  var root = document.querySelector('.calc');
+  if (root) calculator(root);
+})();
+</script>
 
 <script>
 (function(){
