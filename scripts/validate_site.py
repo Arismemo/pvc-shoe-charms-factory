@@ -81,6 +81,7 @@ def main() -> int:
         "130% year-over-year",
         "No commitment, no upfront payment",
         "retained forever",
+        "test reports are available",
     ]
     for phrase in banned:
         check(phrase.lower() not in combined.lower(), f"unsupported/ambiguous claim remains: {phrase}", errors)
@@ -90,7 +91,7 @@ def main() -> int:
     required_index = [
         "Products made in our Fujian factory",
         "specialist mold-making partners",
-        "Supplier material test reports available",
+        "Third-party lab testing arranged on request",
         "100 pcs per design",
         "Budgetary pricing assumptions",
         "Source: SHANXING website",
@@ -105,7 +106,7 @@ def main() -> int:
     required_guide = [
         "mold manufacturing is handled by specialist partners",
         "shoe-charm production stays in our Fujian factory",
-        "supplier material test reports",
+        "accredited third-party lab",
         "finished-product or batch testing",
         "This guide is commercial sourcing information, not legal advice",
     ]
